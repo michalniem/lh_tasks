@@ -1,13 +1,12 @@
 import React from "react";
-import { Route } from "react-router-dom";
 
-function Task({ title, description, path, Solution }) {
+function Task({ title, description, Solution }) {
   return (
-    <Route path={path}>
+    <div>
       <h1>{title}</h1>
       <p>{description}</p>
       {Solution}
-    </Route>
+    </div>
   );
 }
 
