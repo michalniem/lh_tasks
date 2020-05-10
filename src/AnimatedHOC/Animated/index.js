@@ -1,12 +1,33 @@
 import React, { useRef } from "react";
+import PropTypes from "prop-types";
+import { motion, AnimatePresence } from "framer-motion";
 
 import "./style.css";
-import getAnimationPropeprty from "./helpers/getAnimationProperty";
-import useVisibilitySensor from "./hooks/useVisibilitySensor";
+import useVisibilitySensor from "../hooks/useVisibilitySensor";
 
-export function Animated({
-  children,
-  options = {
+function Animated({ children, options }) {
+  const rootRef = useRef(null);
+  const isIntersecting = useVisibilitySensor(rootRef, options.intersection);
+
+  return (
+    <div ref={rootRef}>
+      <AnimatePresence>
+        {isIntersecting && (
+          <motion.div
+            initial={{ y: -30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            {children}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+Animated.defaultProps = {
+  options: {
     animation: {
       name: "fade",
       duration: "1s",
@@ -14,58 +35,14 @@ export function Animated({
       timingFunction: "ease-in-out",
     },
   },
-}) {
-  const containerRef = useRef(null);
-  const isIntersecting = useVisibilitySensor(containerRef);
+};
 
-  return (
-    <div
-      ref={containerRef}
-      style={{
-        opacity: 0,
-        animation: isIntersecting
-          ? getAnimationPropeprty(options.animation)
-          : "none",
-      }}
-    >
-      {children}
-    </div>
-  );
-}
-
-export function WithAnimation(Component, options, propsToPass) {
-  return class extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        isIntersecting: false,
-      };
-      this.containerRef = React.createRef();
-      this.observer = new IntersectionObserver(([entry]) => {
-        this.setState({ isIntersecting: entry.isIntersecting });
-      }, options);
-    }
-
-    componentDidMount() {
-      if (this.containerRef.current)
-        this.observer.observe(this.containerRef.current);
-    }
-
-    componentWillUnmount() {
-      if (this.containerRef.current)
-        this.observer.unobserve(this.containerRef.current);
-    }
-
-    render() {
-      return (
-        <div ref={this.containerRef}>
-          <Component {...propsToPass} isVisible={this.state.isVisible}>
-            {this.props.children}
-          </Component>
-        </div>
-      );
-    }
-  };
-}
+Animated.propTypes = {
+  children: PropTypes.node.isRequired,
+  options: PropTypes.shape({
+    animation: PropTypes.shape({}),
+    intersection: PropTypes.shape({}),
+  }),
+};
 
 export default Animated;

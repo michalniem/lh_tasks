@@ -1,21 +1,21 @@
-import React from "react";
+import React, { Fragment } from "react";
 
-import { WithAnimation, Animated } from "./Animated";
+import Animated from "./Animated";
+import WithAnimation from "./WithAnimation";
 
-function SomeComponent({ props }) {
-  console.log(props);
-  return <p>Blah Blah Blah</p>
+function SomeComponent({ isVisible }) {
+  return <div>I was created by WithAnimation Higher order component</div>;
 }
 
-const SomeComponentWithAnimation = WithAnimation(SomeComponent)
+const SomeComponentWithAnimation = WithAnimation(SomeComponent);
 
 export default function index() {
   return (
     <div>
-      <div style={{ height: "300vh"}}/>
-      {/* <SomeComponentWithAnimation /> */}
+      <div style={{ height: "300vh" }} />
+      <SomeComponentWithAnimation />
       <Animated>
-        <SomeComponent />
+        <div>Example text</div>
       </Animated>
     </div>
   );
