@@ -1,15 +1,19 @@
 import React from "react";
 
-import Animated from "./Animated";
+import { WithAnimation, Animated } from "./Animated";
 
-function SomeComponent() {
-  return <div>some text asasfdsfasdgdg gdsf gdfsg sdf g</div>;
+function SomeComponent({ props }) {
+  console.log(props);
+  return <p>Blah Blah Blah</p>
 }
+
+const SomeComponentWithAnimation = WithAnimation(SomeComponent)
 
 export default function index() {
   return (
     <div>
       <div style={{ height: "300vh"}}/>
+      {/* <SomeComponentWithAnimation /> */}
       <Animated>
         <SomeComponent />
       </Animated>
