@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/localhost_academy/static/css/main.4f818fc2.chunk.css",
+    "main.js": "/localhost_academy/static/js/main.6296c330.chunk.js",
+    "main.js.map": "/localhost_academy/static/js/main.6296c330.chunk.js.map",
+    "runtime-main.js": "/localhost_academy/static/js/runtime-main.1bde0c15.js",
+    "runtime-main.js.map": "/localhost_academy/static/js/runtime-main.1bde0c15.js.map",
+    "static/js/2.10623b03.chunk.js": "/localhost_academy/static/js/2.10623b03.chunk.js",
+    "static/js/2.10623b03.chunk.js.map": "/localhost_academy/static/js/2.10623b03.chunk.js.map",
+    "index.html": "/localhost_academy/index.html",
+    "precache-manifest.aed928d4852f8ef3ac43b59287af8c5b.js": "/localhost_academy/precache-manifest.aed928d4852f8ef3ac43b59287af8c5b.js",
+    "service-worker.js": "/localhost_academy/service-worker.js",
+    "static/css/main.4f818fc2.chunk.css.map": "/localhost_academy/static/css/main.4f818fc2.chunk.css.map",
+    "static/js/2.10623b03.chunk.js.LICENSE.txt": "/localhost_academy/static/js/2.10623b03.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1bde0c15.js",
+    "static/js/2.10623b03.chunk.js",
+    "static/css/main.4f818fc2.chunk.css",
+    "static/js/main.6296c330.chunk.js"
+  ]
+}
