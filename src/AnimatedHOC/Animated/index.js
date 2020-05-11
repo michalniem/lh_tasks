@@ -4,37 +4,39 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import useVisibilitySensor from "../hooks/useVisibilitySensor";
 
-function Animated({ children, options }) {
+const defaultAnimationOptions = {
+  initial: { y: -30, opacity: 0 },
+  animate: { y: 0, opacity: 1 },
+  exit: { opacity: 0 },
+  transition: { duration: 0.3, delay: 0.5 },
+};
+
+const defaultIntersectionOptions = {
+  rootMargin: "0px 0px -100px 0px",
+};
+function Animated({
+  children,
+  options: {
+    animation = defaultAnimationOptions,
+    intersection = defaultIntersectionOptions,
+  },
+}) {
   const rootRef = useRef(null);
-  const isIntersecting = useVisibilitySensor(rootRef, options.intersection);
+  const isIntersecting = useVisibilitySensor(rootRef, intersection);
 
   return (
     <div ref={rootRef}>
       <AnimatePresence>
-        {isIntersecting && (
-          <motion.div {...options.motion}>{children}</motion.div>
-        )}
+        {isIntersecting && <motion.div {...animation}>{children}</motion.div>}
       </AnimatePresence>
     </div>
   );
 }
 
-Animated.defaultProps = {
-  options: {
-    motion: {
-      initial: { y: -30, opacity: 0 },
-      animate: { y: 0, opacity: 1 },
-      exit: { opacity: 0 },
-      transition: { duration: 0.3, delay: 0.5 },
-    },
-    intersection: {}
-  },
-};
-
 Animated.propTypes = {
   children: PropTypes.node.isRequired,
   options: PropTypes.shape({
-    motion: PropTypes.shape({
+    animation: PropTypes.shape({
       initial: PropTypes.object,
       animate: PropTypes.object,
       exit: PropTypes.object,
