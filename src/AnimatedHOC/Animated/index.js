@@ -27,6 +27,7 @@ Animated.defaultProps = {
       exit: { opacity: 0 },
       transition: { duration: 0.3, delay: 0.5 },
     },
+    intersection: {}
   },
 };
 
