@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 import PropTypes from "prop-types";
 import { motion, AnimatePresence } from "framer-motion";
 
-import "./style.css";
 import useVisibilitySensor from "../hooks/useVisibilitySensor";
 
 function Animated({ children, options }) {
@@ -13,13 +12,7 @@ function Animated({ children, options }) {
     <div ref={rootRef}>
       <AnimatePresence>
         {isIntersecting && (
-          <motion.div
-            initial={{ y: -30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            {children}
-          </motion.div>
+          <motion.div {...options.motion}>{children}</motion.div>
         )}
       </AnimatePresence>
     </div>
@@ -28,11 +21,11 @@ function Animated({ children, options }) {
 
 Animated.defaultProps = {
   options: {
-    animation: {
-      name: "fade",
-      duration: "1s",
-      delay: "0.2s",
-      timingFunction: "ease-in-out",
+    motion: {
+      initial: { y: -30, opacity: 0 },
+      animate: { y: 0, opacity: 1 },
+      exit: { opacity: 0 },
+      transition: { duration: 0.3, delay: 0.5 },
     },
   },
 };
@@ -40,8 +33,16 @@ Animated.defaultProps = {
 Animated.propTypes = {
   children: PropTypes.node.isRequired,
   options: PropTypes.shape({
-    animation: PropTypes.shape({}),
-    intersection: PropTypes.shape({}),
+    motion: PropTypes.shape({
+      initial: PropTypes.object,
+      animate: PropTypes.object,
+      exit: PropTypes.object,
+      transition: PropTypes.object,
+    }),
+    intersection: PropTypes.shape({
+      rootMargin: PropTypes.string,
+      threshold: PropTypes.number,
+    }),
   }),
 };
 
