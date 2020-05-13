@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 
-function useVisibilitySensor(ref, options = {}) {
+function useVisibilitySensor(
+  ref,
+  options = {
+    threshold: [1],
+    rootMargin: "0px 0px -100px 0px",
+  }
+) {
   const [isIntersecting, setIntersecting] = useState(false);
 
   useEffect(() => {
@@ -8,7 +14,6 @@ function useVisibilitySensor(ref, options = {}) {
     const observer = new IntersectionObserver(([entry]) => {
       setIntersecting(entry.isIntersecting);
     }, options);
-
     if (currentRef) observer.observe(currentRef);
 
     return () => {
