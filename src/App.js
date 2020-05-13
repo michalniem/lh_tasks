@@ -1,11 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import "./index.css"
+import "./index.css";
 
 import Home from "./shared/Home";
 import Task from "./shared/Task";
-import AnimatedHOC from "./AnimatedHOC";
+
+import routes from "./routes";
 
 export default function App() {
   return (
@@ -15,13 +16,15 @@ export default function App() {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route path="/animatedHOC">
-            <Task
-              title="Animated HOC"
-              description="Animated HOC. Componet created based on IntersectionObserver"
-              Solution={<AnimatedHOC />}
-            />
-          </Route>
+          {routes.map(({ path, title, description, Solution }) => (
+            <Route path={path} key={`route-${path}`}>
+              <Task
+                title={title}
+                description={description}
+                Solution={Solution}
+              />
+            </Route>
+          ))}
         </Switch>
       </Router>
     </div>

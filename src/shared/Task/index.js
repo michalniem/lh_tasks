@@ -5,7 +5,7 @@ function Task({ title, description, Solution }) {
     <div>
       <h1>{title}</h1>
       <p>{description}</p>
-      {Solution}
+      <Solution />
     </div>
   );
 }
