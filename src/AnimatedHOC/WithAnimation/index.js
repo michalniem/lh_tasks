@@ -13,10 +13,10 @@ const defaultIntersectionOptions = {
 };
 
 function WithAnimation(Component, propsToPass) {
-  return ({
+  return (
     animation = defaultAnimationOptions,
     intersection = defaultIntersectionOptions,
-  }) =>
+  ) =>
     class extends React.Component {
       constructor(props) {
         super(props);
