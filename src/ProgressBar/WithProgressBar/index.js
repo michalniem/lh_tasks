@@ -8,12 +8,12 @@ function WithProgressBar(Component) {
       progress: 0,
     };
 
-    handleScroll = (e) => {
-      const offsetTop = e.target.scrollTop;
-      const componentHieght = e.target.scrollHeight - e.target.clientHeight;
-      const scrollProgress = (offsetTop / componentHieght) * 100;
+    handleScroll = (event) => {
+      const { target: { scrollTop, scrollHeight, clientHeight }} = event;
+      const componentHieght = scrollHeight - clientHeight;
+      const percentageScrollProgress = (scrollTop / componentHieght) * 100;
 
-      this.setState({ progress: scrollProgress });
+      this.setState({ progress: percentageScrollProgress });
     };
 
     render() {

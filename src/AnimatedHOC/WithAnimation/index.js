@@ -9,13 +9,13 @@ const defaultAnimationOptions = {
 
 const defaultIntersectionOptions = {
   threshold: [1],
-  rootMargin: "0px 0px -100px 0px",
+  rootMargin: "-100px 0px -100px 0px",
 };
 
 function WithAnimation(Component, propsToPass) {
   return (
     animation = defaultAnimationOptions,
-    intersection = defaultIntersectionOptions,
+    intersection = defaultIntersectionOptions
   ) =>
     class extends React.Component {
       constructor(props) {
