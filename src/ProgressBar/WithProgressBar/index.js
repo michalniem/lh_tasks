@@ -20,7 +20,7 @@ function WithProgressBar(Component) {
       return (
         <div className="progressContainer" onScroll={this.handleScroll}>
           <div className="progressBar">
-            <span style={{ width: `${this.state.progress}%` }} />
+            <span style={{ width: `${this.state.progress}%` }} data-test-id="progress_bar" />
           </div>
           <Component />
         </div>
