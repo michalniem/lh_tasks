@@ -1,0 +1,20 @@
+.progress {
+  &__container {
+    max-height: 50vh;
+    overflow: auto;
+    position: relative;
+  }
+
+  &__bar {
+    position: sticky;
+    height: 5px;
+    top: 0;
+    background: #ebebeb;
+
+    span {
+      height: 100%;
+      display: block;
+      background: blue;
+    }
+  }
+}

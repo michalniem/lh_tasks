@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./idnex.css";
+import "./idnex.scss";
 
 function WithProgressBar(Component) {
   return class extends React.Component {
@@ -18,8 +18,8 @@ function WithProgressBar(Component) {
 
     render() {
       return (
-        <div className="progressContainer" onScroll={this.handleScroll}>
-          <div className="progressBar">
+        <div className="progress__container" onScroll={this.handleScroll}>
+          <div className="progress__bar">
             <span style={{ width: `${this.state.progress}%` }} data-test-id="progress_bar" />
           </div>
           <Component />

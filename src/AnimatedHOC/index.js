@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./index.css";
+import "./index.scss";
 
 import Animated from "./Animated";
 import WithAnimation from "./WithAnimation";
