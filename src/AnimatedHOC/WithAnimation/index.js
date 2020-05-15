@@ -25,12 +25,12 @@ function WithAnimation(Component, propsToPass) {
         };
         this.rootRef = React.createRef();
         this.observer = new IntersectionObserver(
-          ([entry]) => this.obeserverCallback(entry),
+          ([entry]) => this.observerCallback(entry),
           intersection
         );
       }
 
-      obeserverCallback = (entry) => {
+      observerCallback = (entry) => {
         this.setState({ isIntersecting: entry.isIntersecting });
       };
 
@@ -46,6 +46,7 @@ function WithAnimation(Component, propsToPass) {
         return (
           <div ref={this.rootRef}>
             <motion.div
+              data-test-id="animated_element"
               animate={this.state.isIntersecting ? "enter" : "exit"}
               variants={{ enter: animation.enter, exit: animation.exit }}
               transition={animation.transition}

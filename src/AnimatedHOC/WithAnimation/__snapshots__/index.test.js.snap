@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WithProgressBar should render correctly 1`] = `
+<div>
+  <ForwardRef(MotionComponent)
+    animate="exit"
+    data-test-id="animated_element"
+    transition={
+      Object {
+        "delay": 0.5,
+        "duration": 0.3,
+      }
+    }
+    variants={
+      Object {
+        "enter": Object {
+          "opacity": 1,
+        },
+        "exit": Object {
+          "opacity": 0,
+        },
+      }
+    }
+  >
+    <NoopComponent />
+  </ForwardRef(MotionComponent)>
+</div>
+`;
