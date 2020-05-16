@@ -9,7 +9,7 @@ exports[`WithProgressBar should render correctly 1`] = `
     className="progress__bar"
   >
     <span
-      data-test-id="progress_bar"
+      data-test-id="progressBar"
       style={
         Object {
           "width": "50%",

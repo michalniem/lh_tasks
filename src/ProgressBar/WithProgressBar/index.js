@@ -8,8 +8,7 @@ function WithProgressBar(Component) {
       progress: 0,
     };
 
-    handleScroll = (event) => {
-      const { target: { scrollTop, scrollHeight, clientHeight }} = event;
+    handleScroll = ({ target: { scrollTop, scrollHeight, clientHeight }}) => {
       const componentHieght = scrollHeight - clientHeight;
       const percentageScrollProgress = (scrollTop / componentHieght) * 100;
 
@@ -20,7 +19,7 @@ function WithProgressBar(Component) {
       return (
         <div className="progress__container" onScroll={this.handleScroll}>
           <div className="progress__bar">
-            <span style={{ width: `${this.state.progress}%` }} data-test-id="progress_bar" />
+            <span style={{ width: `${this.state.progress}%` }} data-test-id="progressBar" />
           </div>
           <Component />
         </div>

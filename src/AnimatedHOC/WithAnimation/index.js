@@ -46,7 +46,7 @@ function WithAnimation(Component, propsToPass) {
         return (
           <div ref={this.rootRef}>
             <motion.div
-              data-test-id="animated_element"
+              data-test-id="animatedElement"
               animate={this.state.isIntersecting ? "enter" : "exit"}
               variants={{ enter: animation.enter, exit: animation.exit }}
               transition={animation.transition}

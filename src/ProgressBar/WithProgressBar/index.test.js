@@ -28,7 +28,7 @@ describe("WithProgressBar", () => {
 
   test("should set width style based on progress state", () => {
     const progressBarStyle = wrapper
-      .find("[data-test-id='progress_bar']")
+      .find("[data-test-id='progressBar']")
       .prop("style");
     expect(progressBarStyle).toHaveProperty("width", "50%");
   });

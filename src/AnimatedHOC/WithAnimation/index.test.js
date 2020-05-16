@@ -9,14 +9,23 @@ import { setupIntersectionObserverMock } from "../__mocks__/intersectionObserver
 const NoopComponent = () => <div />;
 
 describe("WithProgressBar", () => {
+  let wrapper;
+  const observeSpy = jest.fn();
+  const unobserveSpy = jest.fn();
+
+  beforeAll(() => {
+    setupIntersectionObserverMock({
+      observe: observeSpy,
+      unobserve: unobserveSpy,
+    });
+  });
+
   beforeEach(() => {
-    setupIntersectionObserverMock();
+    const Component = WithAnimation(NoopComponent)();
+    wrapper = shallow(<Component />);
   });
 
   test("should change isIntersecting state to true", () => {
-    const Component = WithAnimation(NoopComponent)();
-    const wrapper = shallow(<Component />);
-
     const instance = wrapper.instance();
     instance.observerCallback({ isIntersecting: true });
 
@@ -24,9 +33,6 @@ describe("WithProgressBar", () => {
   });
 
   test("should change isIntersecting state after observerCallback invoke", () => {
-    const Component = WithAnimation(NoopComponent)();
-    const wrapper = shallow(<Component />);
-
     const instance = wrapper.instance();
     instance.observerCallback({ isIntersecting: true });
 
@@ -34,30 +40,44 @@ describe("WithProgressBar", () => {
   });
 
   test("should set animate variant to enter if isIntersecting state is truthy", () => {
-    const Component = WithAnimation(NoopComponent)();
-    const wrapper = shallow(<Component />);
     wrapper.setState({ isIntersecting: true });
     const animationVariant = wrapper
-      .find("[data-test-id='animated_element']")
-      .prop("animate")
+      .find("[data-test-id='animatedElement']")
+      .prop("animate");
 
     expect(animationVariant).toEqual("enter");
   });
 
   test("should set animate variant to exit if isIntersecting state is falsy", () => {
-    const Component = WithAnimation(NoopComponent)();
-    const wrapper = shallow(<Component />);
     wrapper.setState({ isIntersecting: false });
     const animationVariant = wrapper
-      .find("[data-test-id='animated_element']")
-      .prop("animate")
+      .find("[data-test-id='animatedElement']")
+      .prop("animate");
 
     expect(animationVariant).toEqual("exit");
   });
 
+  test("should invoke observe function from IntersectionObserver after mounting component", () => {
+    const instance = wrapper.instance();
+    const mockRef = { current: true }
+
+    instance.rootRef = mockRef;
+    instance.componentDidMount();
+
+    expect(observeSpy).toHaveBeenCalledWith(mockRef.current);
+  });
+
+  test("should invoke unobserve function from IntersectionObserver after unmounting component", () => {
+    const instance = wrapper.instance();
+    const mockRef = { current: true };
+
+    instance.rootRef = mockRef;
+    instance.componentWillUnmount();
+
+    expect(unobserveSpy).toHaveBeenCalledWith(mockRef.current);
+  });
+
   test("should render correctly", () => {
-    const Component = WithAnimation(NoopComponent)();
-    const wrapper = shallow(<Component />);
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 });
