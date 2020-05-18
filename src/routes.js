@@ -1,5 +1,6 @@
 import AnimatedHOC from "./AnimatedHOC";
 import ProgressBar from "./ProgressBar"
+import OnlyWithAuthedUser from "./OnlyWithAuthedUser"
 
 export default [
   {
@@ -13,5 +14,11 @@ export default [
     title: "Reading Progress Bar",
     description: "Progress Bar HOC. Componet with reader scroll progress bar above wrapped component.",
     Solution: ProgressBar
+  },
+  {
+    path: "/onlyWithAuthedUser",
+    title: "Only With Authed User",
+    description: "Only With Authed User HOC",
+    Solution: OnlyWithAuthedUser
   },
 ]
