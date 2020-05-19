@@ -1,5 +1,6 @@
 import AnimatedHOC from "./AnimatedHOC";
 import ProgressBar from "./ProgressBar"
+import OutsideClickHOC from "./OutsideClickHOC"
 
 export default [
   {
@@ -13,5 +14,11 @@ export default [
     title: "Reading Progress Bar",
     description: "Progress Bar HOC. Componet with reader scroll progress bar above wrapped component.",
     Solution: ProgressBar
+  },
+  {
+    path: "/outsideClickHOC",
+    title: "Outside Click Hoc",
+    description: "Outside Click Hoc",
+    Solution: OutsideClickHOC
   },
 ]
