@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./idnex.scss";
+import "./style.scss";
 
 function WithProgressBar(Component) {
   return class extends React.Component {

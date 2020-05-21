@@ -1,9 +1,27 @@
 import React from "react";
+import { connect } from "react-redux";
+import { compose } from "redux";
 
-function WithProgressBar(Component) {
-  return () => {
-    return <Component />;
+import LoginForm from "../LoginForm";
+import ErrorMessage from "../ErrorMessage";
+
+export function WithAuthedUser(Component) {
+  return ({ userAuthentication }) => {
+    if (userAuthentication.hasIncorrectPayload) {
+      return (
+        <ErrorMessage
+          message={`Component ${Component.name} has incorrect payload`}
+        />
+      );
+    }
+    return userAuthentication.isAuthed ? <Component /> : <LoginForm />;
   };
 }
 
-export default WithProgressBar;
+const mapStateToProps = ({ userAuthentication }) => ({
+  userAuthentication,
+});
+
+const enhances = compose(connect(mapStateToProps), WithAuthedUser);
+
+export default (Component) => enhances(Component);
