@@ -3,14 +3,15 @@ import { connect } from "react-redux";
 
 import "./style.scss";
 
-import { logIn } from "../WithAuthedUser/slice";
+import { isMatchedObject } from "../helpers";
+import authSlice from "../../modules/auth";
 
 const initialState = {
   email: "",
   password: "",
 };
 
-export function LoginForm({ logIn }) {
+export function LoginForm({ logInStart, logInSuccess, logInFailure }) {
   const [formValue, setFormValue] = useState(initialState);
 
   const handleInputChange = ({ target }) => {
@@ -22,7 +23,12 @@ export function LoginForm({ logIn }) {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    logIn(formValue);
+    logInStart();
+    if (isMatchedObject(formValue, initialState)) {
+      logInSuccess(formValue);
+    } else {
+      logInFailure({ error: "Payload doesn't match" });
+    }
     setFormValue(initialState);
   };
 
@@ -45,6 +51,7 @@ export function LoginForm({ logIn }) {
       <input
         name="password"
         id="password"
+        type="password"
         className="form__input"
         value={formValue.password}
         onChange={handleInputChange}
@@ -55,7 +62,9 @@ export function LoginForm({ logIn }) {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  logIn: (payload) => dispatch(logIn(payload)),
+  logInStart: () => dispatch(authSlice.actions.logInStart()),
+  logInSuccess: (payload) => dispatch(authSlice.actions.logInSuccess(payload)),
+  logInFailure: (payload) => dispatch(authSlice.actions.logInFailure(payload)),
 });
 
 export default connect(null, mapDispatchToProps)(LoginForm);

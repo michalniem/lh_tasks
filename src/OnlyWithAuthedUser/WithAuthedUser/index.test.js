@@ -2,18 +2,11 @@ import React from "react";
 import { shallow } from "enzyme";
 
 import { WithAuthedUser } from "./index";
-import reducer, { logIn, logOut } from "./slice";
+import authSlice from "../../modules/auth";
 
 const NoopComponent = () => <div />;
 
-const initialState = {
-  user: {
-    email: "",
-    password: "",
-  },
-  isAuthed: false,
-  hasIncorrectPayload: false,
-};
+const { reducer, actions, initialState } = authSlice;
 
 const testCases = {
   withAuthedUser: [
@@ -21,7 +14,7 @@ const testCases = {
       description:
         "should render wrapped component if data structure is correct and user is authed",
       props: {
-        userAuthentication: {
+        auth: {
           ...initialState,
           user: {
             email: "exampleEmail",
@@ -36,7 +29,7 @@ const testCases = {
       description:
         "should render LoginForm component if data structure is correct and user is not authed",
       props: {
-        userAuthentication: initialState,
+        auth: initialState,
       },
       searchItem: "Connect(LoginForm)",
     },
@@ -44,55 +37,67 @@ const testCases = {
       description:
         "should render ErrorMessage component if data structure is not correct",
       props: {
-        userAuthentication: {
+        auth: {
           ...initialState,
-          hasIncorrectPayload: true,
+          error: true,
         },
       },
       searchItem: "ErrorMessage",
     },
   ],
-  userAuthenticationSlice: [
+  authSlice: [
     {
       description:
-        "should return state with truthy isAuthed flag flag after dispatch logIn action with correct payload structure",
-      action: logIn,
+        "should return initial state if action is unknown",
+      action: () => ({ type: "auth/unknownAction" }),
+      payload: null,
+      expectedState: initialState,
+    },
+    {
+      description:
+        "should set isLoading flag to true, after dispatch logInStart action",
+      action: actions.logInStart,
+      payload: null,
+      expectedState: {
+        ...initialState,
+        isLoading: true,
+      },
+    },
+    {
+      description:
+        "should set isAuthed flag to true, after dispatch logInSuccess action with correct payload",
+      action: actions.logInSuccess,
       payload: {
         email: "exampleEmail",
-        password: "examplePassword",
+        password: "examplePassword"
       },
       expectedState: {
+        ...initialState,
         user: {
           email: "exampleEmail",
-          password: "examplePassword",
+          password: "examplePassword"
         },
         isAuthed: true,
-        hasIncorrectPayload: false,
       },
     },
     {
       description:
-        "should return state with truthy hasIncorrectPayload flag after dispatch logIn action with incorrect payload structure",
-      action: logIn,
+        "should set message error, after dispatch logInFailure action",
+      action: actions.logInFailure,
       payload: {
-        name: "exampleName",
-        surname: "exampleSurname",
+        error: "exampleErrorMessage",
       },
       expectedState: {
-        user: {
-          name: "exampleName",
-          surname: "exampleSurname",
-        },
-        isAuthed: false,
-        hasIncorrectPayload: true,
+        ...initialState,
+        error: "exampleErrorMessage",
       },
     },
     {
       description:
-        "should return state with falsy isAuthed flag after dispatch logOut action",
-      action: logOut,
-      payload: {},
-      expectedState: initialState
+        "should set isAuthed flag to false, after dispatch logOut action",
+      action: actions.logOut,
+      payload: null,
+      expectedState: initialState,
     },
   ],
 };
@@ -102,15 +107,15 @@ describe("WithAuthedUser", () => {
   testCases.withAuthedUser.forEach(({ description, props, searchItem }) => {
     test(description, () => {
       const wrapper = shallow(
-        <Component userAuthentication={props.userAuthentication} />
+        <Component auth={props.auth} />
       );
       expect(wrapper.find(searchItem)).toHaveLength(1);
     });
   });
 });
 
-describe("userAuthenticationSlice", () => {
-  testCases.userAuthenticationSlice.forEach(
+describe("authSlice", () => {
+  testCases.authSlice.forEach(
     ({ description, action, payload, expectedState }) => {
       test(description, () => {
         expect(reducer(initialState, action(payload))).toEqual(expectedState);

@@ -1,13 +1,13 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-export function ErrorMessage({ message }) {
-  return (
-    <span>{message}</span>
-  );
+export function ErrorMessage({ target, customMessage }) {
+  return <span>{customMessage || `Component ${target} was crashed`}</span>;
 }
 
-ErrorMessage.defaultProps = {
-  message: "Component was crashed"
-}
+ErrorMessage.propTypes = {
+  customMessage: PropTypes.string,
+  target: PropTypes.string,
+};
 
-export default ErrorMessage
+export default ErrorMessage;

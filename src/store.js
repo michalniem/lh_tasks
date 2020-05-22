@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux'
 
-import userAuthenticationReducer from "../OnlyWithAuthedUser/WithAuthedUser/slice";
+import authSlice from "./modules/auth";
 
 const rootReducer = combineReducers({
-  userAuthentication: userAuthenticationReducer
+  auth: authSlice.reducer
 });
 
 export default configureStore({

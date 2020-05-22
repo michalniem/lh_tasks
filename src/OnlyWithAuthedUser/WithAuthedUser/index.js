@@ -6,20 +6,18 @@ import LoginForm from "../LoginForm";
 import ErrorMessage from "../ErrorMessage";
 
 export function WithAuthedUser(Component) {
-  return ({ userAuthentication }) => {
-    if (userAuthentication.hasIncorrectPayload) {
+  return ({ auth }) => {
+    if (auth.error) {
       return (
-        <ErrorMessage
-          message={`Component ${Component.name} has incorrect payload`}
-        />
+        <ErrorMessage target={Component.name} />
       );
     }
-    return userAuthentication.isAuthed ? <Component /> : <LoginForm />;
+    return auth.isAuthed ? <Component /> : <LoginForm />;
   };
 }
 
-const mapStateToProps = ({ userAuthentication }) => ({
-  userAuthentication,
+const mapStateToProps = ({ auth }) => ({
+  auth,
 });
 
 const enhances = compose(connect(mapStateToProps), WithAuthedUser);
