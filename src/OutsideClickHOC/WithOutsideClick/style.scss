@@ -1,0 +1,20 @@
+$max-zIndex: 2147483647;
+
+.outsideClick {
+  &__container {
+    &--active {
+      z-index: $max-zIndex;
+    }
+  }
+}
+
+.overlay {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  opacity: 0.3;
+}

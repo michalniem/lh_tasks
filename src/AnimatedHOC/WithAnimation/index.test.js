@@ -25,13 +25,6 @@ describe("WithProgressBar", () => {
     wrapper = shallow(<Component />);
   });
 
-  test("should change isIntersecting state to true", () => {
-    const instance = wrapper.instance();
-    instance.observerCallback({ isIntersecting: true });
-
-    expect(wrapper.state("isIntersecting")).toBeTruthy();
-  });
-
   test("should change isIntersecting state after observerCallback invoke", () => {
     const instance = wrapper.instance();
     instance.observerCallback({ isIntersecting: true });

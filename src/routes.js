@@ -1,6 +1,8 @@
 import AnimatedHOC from "./AnimatedHOC";
 import ProgressBar from "./ProgressBar"
 import OutsideClickHOC from "./OutsideClickHOC"
+import OnlyWithAuthedUser from "./OnlyWithAuthedUser"
+import UseSomeActions from "./UseSomeActions"
 
 export default [
   {
@@ -20,5 +22,17 @@ export default [
     title: "Outside Click Hoc",
     description: "Outside Click Hoc",
     Solution: OutsideClickHOC
+  },
+  {
+    path: "/onlyWithAuthedUser",
+    title: "Only With Authed User",
+    description: "Only With Authed User HOC",
+    Solution: OnlyWithAuthedUser
+  },
+  {
+    path: "/useSomeActions",
+    title: "useSomeActions",
+    description: "useSomeActions custom hook which return choosen actions",
+    Solution: UseSomeActions
   },
 ]
