@@ -33,7 +33,7 @@ export function LoginForm({ logInStart, logInSuccess, logInFailure }) {
   };
 
   return (
-    <form onSubmit={handleFormSubmit}>
+    <form onSubmit={handleFormSubmit} id="login_form">
       <label className="form__label" htmlFor="email">
         email
       </label>
