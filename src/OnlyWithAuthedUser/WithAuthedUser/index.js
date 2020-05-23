@@ -7,11 +7,7 @@ import ErrorMessage from "../ErrorMessage";
 
 export function WithAuthedUser(Component) {
   return ({ auth }) => {
-    if (auth.error) {
-      return (
-        <ErrorMessage target={Component.name} />
-      );
-    }
+    if (auth.error) return <ErrorMessage target={Component.name} />
     return auth.isAuthed ? <Component /> : <LoginForm />;
   };
 }
