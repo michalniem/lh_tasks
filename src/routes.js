@@ -1,6 +1,7 @@
 import AnimatedHOC from "./AnimatedHOC";
 import ProgressBar from "./ProgressBar"
 import OnlyWithAuthedUser from "./OnlyWithAuthedUser"
+import UseSomeActions from "./UseSomeActions"
 
 export default [
   {
@@ -20,5 +21,11 @@ export default [
     title: "Only With Authed User",
     description: "Only With Authed User HOC",
     Solution: OnlyWithAuthedUser
+  },
+  {
+    path: "/useSomeActions",
+    title: "useSomeActions",
+    description: "useSomeActions custom hook which return choosen actions",
+    Solution: UseSomeActions
   },
 ]
