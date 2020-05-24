@@ -6,8 +6,10 @@ function Portal({ children, targetSelector = "portal-root" }) {
   const element = document.createElement("div");
 
   useEffect(() => {
-    root.appendChild(element);
-    return () => root.removeChild(element);
+    if (root) root.appendChild(element);
+    return () => {
+      if (root) root.removeChild(element)
+    };
   }, [element, root]);
 
   return createPortal(children, element);

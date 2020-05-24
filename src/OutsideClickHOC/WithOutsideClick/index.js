@@ -31,6 +31,7 @@ const WithOutsideClick = (Component, propsToPass) => {
         {waitingOnClickOutside && (
           <Portal>
             <div
+              data-test-id="outsideClick__overlay"
               className="outsideClick__overlay"
               onClick={onClickOutside}
             />

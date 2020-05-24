@@ -1,39 +1,37 @@
-// import React from "react";
-// import { shallow } from "enzyme";
-// import toJson from "enzyme-to-json";
+import React from "react";
+import { mount } from "enzyme";
 
-// import WithProgressBar from "./index";
+import WithOutsideClick from "./index";
 
-// const NoopComponent = () => <div />;
+const ComponentForHocTest = ({ onStartListeningClickOutside, waitingOnClickOutside }) => {
+  return (
+    <div>
+      <button data-test-id="outsideClick__trigger" onClick={onStartListeningClickOutside}>waitingOnClickOutside trigger</button>
+      {waitingOnClickOutside && <div data-test-id="outsideClick__component">I should be visible if waitingOnClickOutside is truthy</div>}
+    </div>
+  )
+}
 
-// describe("WithProgressBar", () => {
-//   const Component = WithProgressBar(NoopComponent);
-//   const wrapper = shallow(<Component />);
-//   const instance = wrapper.instance();
+describe("WithOutsideClick", () => {
+  const Component = WithOutsideClick(ComponentForHocTest);
+  const wrapper = mount(<Component />);
+  const triggerButton = wrapper.find("[data-test-id='outsideClick__trigger']");
 
-//   beforeEach(() => {
-//     const event = {
-//       target: {
-//         scrollTop: 1200,
-//         scrollHeight: 2800,
-//         clientHeight: 400,
-//       },
-//     };
-//     instance.handleScroll(event);
-//   });
+  test("should render component without overlay in first load", () => {
+    expect(wrapper.find("[data-test-id='outsideClick__overlay']").exists()).toBeFalsy();
+  });
 
-//   test("should change progress state with proper value", () => {
-//     expect(wrapper.state("progress")).toEqual(50);
-//   });
+  test("should render conditional component and overlay after invoke onStartListeningClickOutside function", () => {
+    triggerButton.simulate("click");
 
-//   test("should set width style based on progress state", () => {
-//     const progressBarStyle = wrapper
-//       .find("[data-test-id='progressBar']")
-//       .prop("style");
-//     expect(progressBarStyle).toHaveProperty("width", "50%");
-//   });
+    expect(wrapper.find("[data-test-id='outsideClick__component']").exists()).toBeTruthy();
+    expect(wrapper.find("[data-test-id='outsideClick__overlay']").exists()).toBeTruthy();
+  });
 
-//   test("should render correctly", () => {
-//     expect(toJson(wrapper)).toMatchSnapshot();
-//   });
-// });
+  test("should not render conditional component and overlay after invoke onClickOutside function", () => {
+    wrapper.find("[data-test-id='outsideClick__overlay']").simulate("click");
+
+    expect(wrapper.find("[data-test-id='outsideClick__component']").exists()).toBeFalsy();
+    expect(wrapper.find("[data-test-id='outsideClick__overlay']").exists()).toBeFalsy();
+  });
+});
