@@ -4,17 +4,17 @@ $max-zIndex: 2147483647;
   &__container {
     &--active {
       z-index: $max-zIndex;
+      position: relative;
     }
   }
-}
-
-.overlay {
-  z-index: -1;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: black;
-  opacity: 0.3;
+  &__overlay {
+    z-index: $max-zIndex - 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    opacity: 0.3;
+  }
 }

@@ -1,50 +1,45 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 import cn from "classnames";
 
 import "./style.scss";
 
-// import { OverlayContext } from "./context"
+import Portal from "../../shared/Portal";
 
-function WithOutsideClick(Component) {
-  return class extends React.Component {
-    state = {
-      waitingOnClickOutside: false,
-    };
+const WithOutsideClick = (Component, propsToPass) => {
+  const ComposedComponent = () => {
+    const [waitingOnClickOutside, setWaitingOnClickOutside] = useState(false);
 
-    onStartListeningClickOutside = () => {
-      this.setState({
-        waitingOnClickOutside: true,
-      });
-    };
+    const onStartListeningClickOutside = useCallback(() => {
+      setWaitingOnClickOutside(true)
+    }, []);
 
-    onClickOutside = () => {
-      this.setState({
-        waitingOnClickOutside: false,
-      });
-    };
+    const onClickOutside = useCallback(() => {
+      setWaitingOnClickOutside(false)
+    }, []);
 
-    render() {
-      const { waitingOnClickOutside } = this.state;
-      return (
-        <div
-          className={cn("outsideClick__container", {
-            "outsideClick__container--active": waitingOnClickOutside,
-          })}
-        >
-          {waitingOnClickOutside && (
+    return (
+      <div
+        className={cn("outsideClick__container", {
+          "outsideClick__container--active": waitingOnClickOutside,
+        })}
+      >
+        <Component
+          {...propsToPass}
+          onStartListeningClickOutside={onStartListeningClickOutside}
+          waitingOnClickOutside={waitingOnClickOutside}
+        />
+        {waitingOnClickOutside && (
+          <Portal>
             <div
-              onClick={this.onClickOutside}
               className="outsideClick__overlay"
+              onClick={onClickOutside}
             />
-          )}
-          <Component
-            onStartListeningClickOutside={this.onStartListeningClickOutside}
-            waitingOnClickOutside={waitingOnClickOutside}
-          />
-        </div>
-      );
-    }
-  };
+          </Portal>
+        )}
+      </div>
+    );
+  }
+  return ComposedComponent;
 }
 
 export default WithOutsideClick;

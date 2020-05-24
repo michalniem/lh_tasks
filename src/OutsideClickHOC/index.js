@@ -12,25 +12,42 @@ function SomeComponent({ onStartListeningClickOutside }) {
   );
 }
 
-function CustomDropdown({onStartListeningClickOutside,  waitingOnClickOutside }) {
+const dropdownOptions = [
+  "Option1",
+  "Option2",
+  "Option3",
+  "Option4",
+  "Option5",
+  "Option6",
+  "Option7",
+  "Option8",
+];
+
+function CustomDropdown({
+  options,
+  onStartListeningClickOutside,
+  waitingOnClickOutside,
+}) {
   return (
     <div className="dropdown__container">
-      <span className="dropdown__default" onClick={onStartListeningClickOutside}>Select something</span>
-      {waitingOnClickOutside && <div className="dropdown__options">
-        <div>Option1</div>
-        <div>Option2</div>
-        <div>Option3</div>
-        <div>Option4</div>
-        <div>Option5</div>
-        <div>Option6</div>
-        <div>Option7</div>
-        <div>Option8</div>
-      </div>}
+      <span
+        className="dropdown__default"
+        onClick={onStartListeningClickOutside}
+      >
+        Select something
+      </span>
+      {waitingOnClickOutside && (
+        <ul className="dropdown__options">
+          {options.map((option) => (
+            <li>{option}</li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
 
-const CustomDropdownWIthOutsideClick = WithOutsideClick(CustomDropdown)
+const CustomDropdownWIthOutsideClick = WithOutsideClick(CustomDropdown, { options: dropdownOptions });
 
 const SomeComponentWithOutsideClick = WithOutsideClick(SomeComponent);
 
