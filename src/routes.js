@@ -3,6 +3,7 @@ import ProgressBar from "./ProgressBar"
 import OutsideClickHOC from "./OutsideClickHOC"
 import OnlyWithAuthedUser from "./OnlyWithAuthedUser"
 import UseSomeActions from "./UseSomeActions"
+import MultilangComponent from "./MultilangComponent"
 
 export default [
   {
@@ -34,5 +35,11 @@ export default [
     title: "useSomeActions",
     description: "useSomeActions custom hook which return choosen actions",
     Solution: UseSomeActions
+  },
+  {
+    path: "/multilangComponent",
+    title: "MultilangComponent",
+    description: "MultilangComponent",
+    Solution: MultilangComponent
   },
 ]

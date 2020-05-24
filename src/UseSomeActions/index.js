@@ -7,7 +7,6 @@ const { logInStart, logInSuccess, logInFailure } = authSlice.actions;
 
 function SomeComponent() {
   const actions = useSomeActions([ logInStart, logInSuccess, logInFailure ]);
-  console.log(actions);
   return <div>Some Component</div>;
 }
 

@@ -1,0 +1,11 @@
+.langSwitcher {
+  &__list {
+    list-style-type: none;
+    display: flex;
+  }
+
+  &__button {
+    width: 200px;
+    height: 40px;
+  }
+}
