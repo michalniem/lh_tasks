@@ -39,7 +39,7 @@ function CustomDropdown({
       {waitingOnClickOutside && (
         <ul className="dropdown__options">
           {options.map((option) => (
-            <li>{option}</li>
+            <li key={option}>{option}</li>
           ))}
         </ul>
       )}
