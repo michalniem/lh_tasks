@@ -5,5 +5,5 @@ export const defaultLang = "pl";
 
 export default {
   pl,
-  en,
+  gb: en,
 };

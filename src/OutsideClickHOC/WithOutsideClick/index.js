@@ -5,16 +5,12 @@ import "./style.scss";
 
 import Portal from "../../shared/Portal";
 
-const WithOutsideClick = (Component, propsToPass) => {
-  const ComposedComponent = () => {
+const WithOutsideClick = (Component) => {
+  const ComposedComponent = (propsToPass) => {
     const [waitingOnClickOutside, setWaitingOnClickOutside] = useState(false);
 
-    const onStartListeningClickOutside = useCallback(() => {
-      setWaitingOnClickOutside(true)
-    }, []);
-
-    const onClickOutside = useCallback(() => {
-      setWaitingOnClickOutside(false)
+    const toggleWaitingOnClickHandler = useCallback(() => {
+      setWaitingOnClickOutside(prevState => !prevState);
     }, []);
 
     return (
@@ -25,7 +21,7 @@ const WithOutsideClick = (Component, propsToPass) => {
       >
         <Component
           {...propsToPass}
-          onStartListeningClickOutside={onStartListeningClickOutside}
+          toggleWaitingOnClick={toggleWaitingOnClickHandler}
           waitingOnClickOutside={waitingOnClickOutside}
         />
         {waitingOnClickOutside && (
@@ -33,7 +29,7 @@ const WithOutsideClick = (Component, propsToPass) => {
             <div
               data-test-id="outsideClick__overlay"
               className="outsideClick__overlay"
-              onClick={onClickOutside}
+              onClick={toggleWaitingOnClickHandler}
             />
           </Portal>
         )}

@@ -6,8 +6,8 @@ import { getObjectKeyByPath } from "../helpers";
 
 function TranslatedText({ id, defaultText, children }) {
   const translations = useTranslations();
+  const translatedText = id ? getObjectKeyByPath(id, translations) : defaultText;
 
-  const translatedText = getObjectKeyByPath(id, translations) || defaultText;
   return children ? children(translatedText) : <span>{translatedText}</span>;
 }
 

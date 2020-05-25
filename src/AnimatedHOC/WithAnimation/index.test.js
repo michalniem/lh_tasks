@@ -4,7 +4,7 @@ import toJson from "enzyme-to-json";
 
 import WithAnimation from "./index";
 
-import { setupIntersectionObserverMock } from "../__mocks__/intersectionObserverMock";
+import { setupIntersectionObserverMock } from "../__mocks__/intersectionObserver.mock";
 
 const NoopComponent = () => <div />;
 

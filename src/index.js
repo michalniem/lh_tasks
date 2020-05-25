@@ -13,8 +13,8 @@ ReactDOM.render(
       <Provider store={store}>
         <App />
       </Provider>
-      <div id="portal-root" />
     </TranslationsProvider>
+    <div id="portal-root" />
   </React.StrictMode>,
   document.getElementById("root")
 );

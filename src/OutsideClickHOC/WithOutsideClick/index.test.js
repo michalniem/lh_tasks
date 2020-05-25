@@ -3,10 +3,10 @@ import { mount } from "enzyme";
 
 import WithOutsideClick from "./index";
 
-const ComponentForHocTest = ({ onStartListeningClickOutside, waitingOnClickOutside }) => {
+const ComponentForHocTest = ({ toggleWaitingOnClick, waitingOnClickOutside }) => {
   return (
     <div>
-      <button data-test-id="outsideClick__trigger" onClick={onStartListeningClickOutside}>waitingOnClickOutside trigger</button>
+      <button data-test-id="outsideClick__trigger" onClick={toggleWaitingOnClick}>waitingOnClickOutside trigger</button>
       {waitingOnClickOutside && <div data-test-id="outsideClick__component">I should be visible if waitingOnClickOutside is truthy</div>}
     </div>
   )
@@ -21,14 +21,14 @@ describe("WithOutsideClick", () => {
     expect(wrapper.find("[data-test-id='outsideClick__overlay']").exists()).toBeFalsy();
   });
 
-  test("should render conditional component and overlay after invoke onStartListeningClickOutside function", () => {
+  test("should render conditional component and overlay after invoke toggleWaitingOnClick function", () => {
     triggerButton.simulate("click");
 
     expect(wrapper.find("[data-test-id='outsideClick__component']").exists()).toBeTruthy();
     expect(wrapper.find("[data-test-id='outsideClick__overlay']").exists()).toBeTruthy();
   });
 
-  test("should not render conditional component and overlay after invoke onClickOutside function", () => {
+  test("should not render conditional component and overlay after after invoking the toggleWaitingOnClick function again", () => {
     wrapper.find("[data-test-id='outsideClick__overlay']").simulate("click");
 
     expect(wrapper.find("[data-test-id='outsideClick__component']").exists()).toBeFalsy();

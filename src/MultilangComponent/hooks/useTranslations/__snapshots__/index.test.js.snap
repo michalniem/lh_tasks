@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WithOutsideClick should return all translations for specific section in default language 1`] = `
+<ContextProvider
+  value={
+    Object {
+      "setLanguage": [Function],
+      "translations": Object {
+        "attention": Object {
+          "ctaButton": "Dowiedź się więcej",
+          "subtitle": "Pomoże Ci ogarnąć jak zmieniać język w apkach reacta",
+          "title": "Dobrze, że jesteś, sprawdź to zadanie",
+        },
+        "newsletter": Object {
+          "action": "/new-subscriber?lang=pl",
+          "ctaButton": "Idź do repo ->",
+          "title": "Bądź na bieżąco",
+        },
+      },
+    }
+  }
+>
+  <ComponentForHookTest
+    sectionName="newsletter"
+  />
+</ContextProvider>
+`;

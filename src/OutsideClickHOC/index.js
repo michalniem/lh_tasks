@@ -1,8 +1,7 @@
 import React from "react";
 
 import WithOutsideClick from "./WithOutsideClick";
-
-import "./style.scss";
+import CustomDropdown from "../shared/CustomDropdown";
 
 function SomeComponent({ onStartListeningClickOutside }) {
   return (
@@ -23,39 +22,13 @@ const dropdownOptions = [
   "Option8",
 ];
 
-function CustomDropdown({
-  options,
-  onStartListeningClickOutside,
-  waitingOnClickOutside,
-}) {
-  return (
-    <div className="dropdown__container">
-      <span
-        className="dropdown__default"
-        onClick={onStartListeningClickOutside}
-      >
-        Select something
-      </span>
-      {waitingOnClickOutside && (
-        <ul className="dropdown__options">
-          {options.map((option) => (
-            <li key={option}>{option}</li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
-}
-
-const CustomDropdownWIthOutsideClick = WithOutsideClick(CustomDropdown, { options: dropdownOptions });
-
 const SomeComponentWithOutsideClick = WithOutsideClick(SomeComponent);
 
 export default function index() {
   return (
     <>
       <SomeComponentWithOutsideClick />
-      <CustomDropdownWIthOutsideClick />
+      <CustomDropdown options={dropdownOptions} />
     </>
   );
 }
