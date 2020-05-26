@@ -1,7 +1,7 @@
 import React from "react";
 import { mount } from "enzyme";
 
-import TranslationsProvider from "../context";
+import TranslationsProvider from "../context/LangContext";
 import TranslatedText from "./index";
 import translations, { defaultLang } from "../../translations/config";
 

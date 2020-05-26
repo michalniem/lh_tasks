@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { Provider } from "react-redux";
 
-import TranslationsProvider from "./MultilangComponent/context";
+import TranslationsProvider from "./MultilangComponent/context/LangContext";
 
 import store from "./store";
 

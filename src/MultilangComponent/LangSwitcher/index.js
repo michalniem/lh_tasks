@@ -1,21 +1,20 @@
-import React, { useContext, useMemo } from "react";
+import React, { useMemo } from "react";
 
 import "./style.scss";
 
-import { LangContext } from "../context";
-import langs from "../../translations/config";
+import translations from "../../translations/config";
+import { useTranslations } from "../context/LangContext";
 
 import Flag from "../Flag/index";
 import CustomDropdown from "../../shared/CustomDropdown";
 
 function LangSwitcher() {
-  const { setLanguage } = useContext(LangContext);
+  const { setLanguage } = useTranslations();
 
   const dropdownOptions = useMemo(
     () =>
-      Object.keys(langs).map((lang) => (
+      Object.keys(translations).map((lang) => (
         <div
-          key={lang}
           className="langSwitcher__button"
           onClick={() => setLanguage(lang)}
         >
@@ -28,6 +27,7 @@ function LangSwitcher() {
 
   return (
     <CustomDropdown
+      name="langSwitcher"
       defaultMessage="Select language"
       options={dropdownOptions}
     />

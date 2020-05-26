@@ -1,8 +1,10 @@
 import React from "react";
-import useTranslations from "../hooks/useTranslations";
+import { useTranslations } from "../context/LangContext";
 
 function AttentionSection({ sectionName = "attention" }) {
-  const { title, subtitle, ctaButton } = useTranslations(sectionName);
+  const {
+    translations: { title, subtitle, ctaButton },
+  } = useTranslations(sectionName);
   return (
     <div>
       <h1>{title}</h1>

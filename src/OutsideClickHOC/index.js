@@ -28,7 +28,7 @@ export default function index() {
   return (
     <>
       <SomeComponentWithOutsideClick />
-      <CustomDropdown options={dropdownOptions} />
+      <CustomDropdown name="outsideClickSelect" options={dropdownOptions} />
     </>
   );
 }

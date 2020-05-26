@@ -3,11 +3,11 @@ import { mount } from "enzyme";
 
 import translations, { defaultLang } from "../../../translations/config";
 
-import TranslationsProvider from "../../context";
-import useTranslations from "./index";
+import TranslationsProvider from ".";
+import { useTranslations } from "./index";
 
 const ComponentForHookTest = ({ sectionName }) => {
-  const translations = useTranslations(sectionName);
+  const { translations } = useTranslations(sectionName);
   return (
     <div data-test-id="translations_container">
       {JSON.stringify(translations)}
