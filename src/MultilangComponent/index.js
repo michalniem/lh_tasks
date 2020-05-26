@@ -5,9 +5,13 @@ import AttentionSection from "./AttentionSection";
 import TranslatedText from "./TranslatedText";
 import LangSwitcher from "./LangSwitcher";
 
+import { useTranslations } from "./context/LangContext"
+
 function Index() {
+  const { lang } = useTranslations();
   return (
     <div>
+      <span>Current language: {lang}</span>
       <LangSwitcher />
       <div>
         Translated text example usage by component (text is rendered inside span):{" "}
