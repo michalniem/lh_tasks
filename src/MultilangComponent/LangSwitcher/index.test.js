@@ -7,6 +7,7 @@ import translations, { defaultLang } from "../../translations/config";
 
 describe("LangSwitcher", () => {
   const setLanguageSpy = jest.fn();
+
   const contextValue = {
     setLanguage: setLanguageSpy,
     lang: defaultLang,

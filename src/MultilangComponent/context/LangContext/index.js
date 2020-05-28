@@ -1,11 +1,13 @@
 import React, { useState, useCallback, useContext } from "react";
 
-import translations, { defaultLang } from "../../../translations/config";
+import allTranslations, { defaultLang } from "../../../translations/config";
+import { isMatchedObject } from "../../../OnlyWithAuthedUser/helpers";
 
-export const LangContext = React.createContext(translations);
+export const LangContext = React.createContext(allTranslations);
 
 export const useTranslations = (sectionName) => {
   const { translations, ...restContext } = useContext(LangContext);
+
   return {
     translations: sectionName ? translations[sectionName] : translations,
     ...restContext,
@@ -17,9 +19,18 @@ function TranslationsProvider({ children }) {
 
   const setLanguage = useCallback((code) => setLang(code), []);
 
+  const hasAllTranslations = isMatchedObject(
+    allTranslations[lang],
+    allTranslations[defaultLang]
+  );
+
   return (
     <LangContext.Provider
-      value={{ translations: translations[lang], setLanguage, lang }}
+      value={{
+        translations: allTranslations[hasAllTranslations ? lang : defaultLang],
+        setLanguage,
+        lang,
+      }}
     >
       {children}
     </LangContext.Provider>
