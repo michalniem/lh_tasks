@@ -2,7 +2,6 @@ import AnimatedHOC from "./AnimatedHOC";
 import ProgressBar from "./ProgressBar"
 import OutsideClickHOC from "./OutsideClickHOC"
 import OnlyWithAuthedUser from "./OnlyWithAuthedUser"
-import UseSomeActions from "./UseSomeActions"
 import MultilangComponent from "./MultilangComponent"
 
 export default [
@@ -31,15 +30,9 @@ export default [
     Solution: OnlyWithAuthedUser
   },
   {
-    path: "/useSomeActions",
-    title: "useSomeActions",
-    description: "useSomeActions custom hook which return choosen actions",
-    Solution: UseSomeActions
-  },
-  {
     path: "/multilangComponent",
     title: "MultilangComponent",
-    description: "MultilangComponent",
+    description: "MultilangComponent, TranslatedText, useTranslations hook",
     Solution: MultilangComponent
   },
 ]
