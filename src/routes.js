@@ -3,6 +3,7 @@ import ProgressBar from "./ProgressBar"
 import OutsideClickHOC from "./OutsideClickHOC"
 import OnlyWithAuthedUser from "./OnlyWithAuthedUser"
 import MultilangComponent from "./MultilangComponent"
+import RefLink from "./RefLink"
 
 export default [
   {
@@ -34,5 +35,11 @@ export default [
     title: "MultilangComponent",
     description: "MultilangComponent, TranslatedText, useTranslations hook",
     Solution: MultilangComponent
+  },
+  {
+    path: "/*?ref=ABCDEFG",
+    title: "Reflink",
+    description: "Reflink",
+    Solution: RefLink
   },
 ]

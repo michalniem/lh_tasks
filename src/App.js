@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 import "./style.scss";
 
@@ -7,11 +7,12 @@ import Home from "./shared/Home";
 import Task from "./shared/Task";
 
 import routes from "./routes";
+import RefLinkProvider from "./RefLink/RefLinkProvider";
 
-export default function App() {
+function App() {
   return (
     <div className="container">
-      <Router>
+      <RefLinkProvider>
         <Switch>
           <Route exact path="/">
             <Home />
@@ -26,7 +27,9 @@ export default function App() {
             </Route>
           ))}
         </Switch>
-      </Router>
+      </RefLinkProvider>
     </div>
   );
 }
+
+export default App;
