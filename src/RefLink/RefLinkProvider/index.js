@@ -1,22 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import { useLocation, Redirect } from "react-router-dom";
 
 import {
   LocalStorage,
-  getRefLinkConntectionStatus,
   getRefLinkCode,
+  getRefLinkMatch
 } from "../helpers";
 
-export const RefLinkContext = React.createContext();
+export const RefLinkContext = createContext();
+
+export const useRefLink = () => useContext(RefLinkContext);
 
 function RefLinkProvider({ children }) {
   const [refLink, setRefLink] = useState(() => LocalStorage.getItem("refLink"));
   const { pathname, search } = useLocation();
-
-  const isPathConnectedWithRefLink = getRefLinkConntectionStatus(
-    pathname,
-    search
-  );
+  const isPathConnectedWithRefLink = getRefLinkMatch(pathname + search);
 
   useEffect(() => {
     if (isPathConnectedWithRefLink) {

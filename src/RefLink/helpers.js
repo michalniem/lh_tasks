@@ -16,7 +16,6 @@ export const LocalStorage = {
   },
 };
 
-export const getRefLinkConntectionStatus = (pathname, search) =>
-  pathname.startsWith("/*") && search.startsWith("?ref=");
+export const getRefLinkMatch = (path) => /^\/\*\?ref=/.test(path)
 
 export const getRefLinkCode = (path) => path.replace("?ref=", "");

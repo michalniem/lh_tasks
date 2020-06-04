@@ -3,8 +3,7 @@ import { mount } from "enzyme";
 
 import translations, { defaultLang } from "../../../translations/config";
 
-import TranslationsProvider from ".";
-import { useTranslations } from "./index";
+import TranslationsProvider, { useTranslations } from ".";
 
 const ComponentForHookTest = ({ sectionName }) => {
   const { translations } = useTranslations(sectionName);
