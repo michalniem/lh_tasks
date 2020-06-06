@@ -17,6 +17,9 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
+          <Route>
+            <div>404</div>
+          </Route>
           {routes.map(({ path, title, description, Solution }) => (
             <Route path={path} key={`route-${path}`}>
               <Task
