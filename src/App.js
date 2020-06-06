@@ -17,7 +17,7 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route>
+          <Route path="/*">
             <div>404</div>
           </Route>
           {routes.map(({ path, title, description, Solution }) => (

@@ -1,11 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useLocation, Redirect } from "react-router-dom";
 
-import {
-  LocalStorage,
-  getRefLinkCode,
-  getRefLinkMatch
-} from "../helpers";
+import { LocalStorage, getRefLinkCode, getRefLinkMatch } from "../helpers";
 
 export const RefLinkContext = createContext();
 
