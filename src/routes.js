@@ -37,7 +37,7 @@ export default [
     Solution: MultilangComponent
   },
   {
-    path: "/*?ref=ABCDEFG",
+    path: "/refLink",
     title: "Reflink",
     description: "Reflink",
     Solution: RefLink
