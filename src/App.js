@@ -17,9 +17,6 @@ function App() {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route path="*">
-            <div>404</div>
-          </Route>
           {routes.map(({ path, title, description, Solution }) => (
             <Route path={path} key={`route-${path}`}>
               <Task
@@ -29,6 +26,9 @@ function App() {
               />
             </Route>
           ))}
+          <Route path="*">
+            <div>404</div>
+          </Route>
         </Switch>
       </RefLinkProvider>
     </div>
