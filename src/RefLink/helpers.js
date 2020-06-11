@@ -16,6 +16,6 @@ export const LocalStorage = {
   },
 };
 
-export const getRefLinkMatch = (path) => /^\/\*\?ref=/.test(path)
+export const getRefLinkMatch = (path) => /^\?ref=/.test(path)
 
 export const getRefLinkCode = (path) => path.replace("?ref=", "");

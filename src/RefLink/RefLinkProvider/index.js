@@ -9,8 +9,8 @@ export const useRefLink = () => useContext(RefLinkContext);
 
 function RefLinkProvider({ children }) {
   const [refLink, setRefLink] = useState(() => LocalStorage.getItem("refLink"));
-  const { pathname, search } = useLocation();
-  const isPathConnectedWithRefLink = getRefLinkMatch(pathname + search);
+  const { search } = useLocation();
+  const isPathConnectedWithRefLink = getRefLinkMatch(search);
 
   useEffect(() => {
     if (isPathConnectedWithRefLink) {
