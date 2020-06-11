@@ -10,6 +10,7 @@
 //   // można zatwiedzić koszyk i wtedy, użytkownik dostaje komunikat ile finalnie wyszło mu do zapłaty netto (bez podatku) i brutto (z podatkiem)
 // }
 import { v4 as uuidv4 } from "uuid";
+import Product from "../Product";
 
 const defaultParams = {
   products: [],
@@ -33,13 +34,16 @@ class Cart {
   getNumberOfProducts = () => this.products.length;
 
   addProductToCart = (product, count = 1) => {
-    //instance of Product
-    new Array(count).fill(0).forEach(() => {
-      this.products.push(product);
-    });
-    console.log(
-      `Product ${product.name} with id ${product.id} was successfully added ${count} times to the cart`
-    );
+    const isValidProduct =
+      product instanceof Product && product.name && product.prices;
+    if (isValidProduct) {
+      new Array(count).fill(0).forEach(() => {
+        this.products.push(product);
+      });
+      console.log(
+        `Product ${product.name} with id ${product.id} was successfully added ${count} times to the cart`
+      );
+    }
   };
 
   removeProductFromCart = ({ id }) => {
