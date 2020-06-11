@@ -33,6 +33,7 @@ class Cart {
   getNumberOfProducts = () => this.products.length;
 
   addProductToCart = (product, count = 1) => {
+    //instance of Product
     new Array(count).fill(0).forEach(() => {
       this.products.push(product);
     });
@@ -42,6 +43,7 @@ class Cart {
   };
 
   removeProductFromCart = ({ id }) => {
+    // product id sprawdzenie
     this.products = this.products.filter((product) => product.id !== id);
     console.log(
       `Product ${product.name} with id ${product.id} was successfully removed from the cart`

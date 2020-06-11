@@ -4,12 +4,11 @@ describe("Cart", () => {
   it("should get summary brutto values of products in cart", () => {
     const cart = setupCart({
       products: [
-        setupProduct({ prices: { sale: 10, regular: 20 } }),
-        setupProduct({ prices: { sale: 10, regular: 20 }, sale: true }),
+        setupProduct({ prices: { sale: 10, regular: 20 }}),
+        setupProduct({ prices: { sale: 10, regular: 20 }}),
       ],
     });
     const expectedBruttoValue = 30;
-    console.log(cart.products)
     expect(cart.getSummaryValue()).toEqual(expectedBruttoValue);
   });
 
