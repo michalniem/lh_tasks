@@ -5,17 +5,20 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
 import TranslationsProvider from "./MultilangComponent/context/LangContext";
+import GeolocalizationProvider from "./GeolocalizationCustomHook/context/GeolocalizationContext";
 
 import store from "./store";
 
 ReactDOM.render(
   <React.StrictMode>
     <TranslationsProvider>
-      <Provider store={store}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </Provider>
+      <GeolocalizationProvider>
+        <Provider store={store}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </Provider>
+      </GeolocalizationProvider>
     </TranslationsProvider>
     <div id="portal-root" />
   </React.StrictMode>,
