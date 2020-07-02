@@ -6,6 +6,8 @@ import React, {
   useCallback,
 } from "react";
 
+import { serializeGeolocalizationToObject } from "../../helpers";
+
 export const GeolocalizationContext = createContext();
 
 const defaultGeolocalizationState = {
@@ -27,19 +29,8 @@ function GeolocalizationProvider({ children }) {
   const [error, setError] = useState(null);
   const watcherIdRef = useRef(null);
 
-  const onSucceededChangePosition = useCallback(({ coords, timestamp }) => {
-    setData({
-      coords: {
-        accuracy: coords.accuracy,
-        altitude: coords.altitude,
-        altitudeAccuracy: coords.altitudeAccuracy,
-        heading: coords.heading,
-        latitude: coords.latitude,
-        longitude: coords.longitude,
-        speed: coords.speed,
-      },
-      timestamp: timestamp,
-    });
+  const onSucceededChangePosition = useCallback((position) => {
+    setData(serializeGeolocalizationToObject(position));
   }, []);
 
   const onFailedChangePosition = useCallback((error) => {
