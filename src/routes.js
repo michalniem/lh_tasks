@@ -5,6 +5,7 @@ import OnlyWithAuthedUser from "./OnlyWithAuthedUser"
 import MultilangComponent from "./MultilangComponent"
 import RefLink from "./RefLink"
 import GeolocalizationCustomHook from "./GeolocalizationCustomHook"
+import ProxiedPromise from "./ProxiedPromise"
 
 export default [
   {
@@ -48,5 +49,11 @@ export default [
     title: "useGeo",
     description: "Custom hook to watching user position",
     Solution: GeolocalizationCustomHook
+  },
+  {
+    path: "/proxiedPromise",
+    title: "ProxiedPromise",
+    description: "Extended Promise functionality class",
+    Solution: ProxiedPromise
   },
 ]
